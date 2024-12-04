@@ -1,8 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, user } from '@angular/fire/auth';
+import { Injectable, inject, signal } from '@angular/core';
+import { Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { AuthCredentials, User } from '../interfaces/user.interface';
+import { AuthCredentials } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +10,28 @@ export class AuthService {
   private auth = inject(Auth);
   private router = inject(Router);
 
-  readonly user = toSignal(user(this.auth));
+  currentUser = signal<User | null>(null);
+  isLoading = signal(false);
+  error = signal<string | null>(null);
+
+  constructor() {
+    this.auth.onAuthStateChanged(user => {
+      this.currentUser.set(user);
+    });
+  }
 
   async login({ email, password }: AuthCredentials): Promise<void> {
     try {
+      this.isLoading.set(true);
+      this.error.set(null);
       await signInWithEmailAndPassword(this.auth, email, password);
       await this.router.navigate(['/recipes']);
     } catch (error) {
+      this.error.set('Login failed');
+      console.error('Login error:', error);
       throw this.handleError(error);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 
@@ -42,8 +55,9 @@ export class AuthService {
   async logout(): Promise<void> {
     try {
       await signOut(this.auth);
-      await this.router.navigate(['/login']);
+      await this.router.navigate(['/auth/login']);
     } catch (error) {
+      console.error('Logout error:', error);
       throw this.handleError(error);
     }
   }
