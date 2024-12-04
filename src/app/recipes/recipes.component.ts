@@ -17,49 +17,50 @@ import { Recipe } from './interfaces/recipe.interface';
     ProgressSpinnerModule
   ],
   template: `
-    <div class="p-4">
-      @if (recipeService.isLoading()) {
-        <div class="flex justify-content-center">
-          <p-progressSpinner />
-        </div>
-      } @else if (recipeService.error()) {
-        <div class="flex justify-content-center">
-          <p class="text-red-500">{{ recipeService.error() }}</p>
-        </div>
-      } @else {
-        <p-dataView
-          [value]="recipeService.recipes()"
-          layout="grid"
-        >
-          <ng-template pTemplate="grid" let-recipes>
-            <div class="grid">
-              @for (recipe of recipes; track recipe.id) {
-                <div class="col-12 sm:col-6 lg:col-4 xl:col-3 p-2">
-                  <div class="p-4 border-1 surface-border surface-card border-round">
-                    <div class="flex flex-column align-items-center gap-3">
+    <div class="flex justify-content-center">
+      <div class="w-full max-w-7xl p-4">
+        @if (recipeService.isLoading()) {
+          <div class="flex justify-content-center">
+            <p-progressSpinner />
+          </div>
+        } @else if (recipeService.error()) {
+          <div class="flex justify-content-center">
+            <p class="text-red-500">{{ recipeService.error() }}</p>
+          </div>
+        } @else {
+          <p-dataView
+            [value]="recipeService.recipes()"
+            layout="list"
+          >
+            <ng-template pTemplate="list" let-recipes>
+              <div class="flex flex-column gap-4">
+                @for (recipe of recipes; track recipe.id) {
+                  <div class="flex surface-card p-4 border-round">
+                    <div class="w-12rem flex-shrink-0">
                       <img
                         [ngSrc]="recipe.imageUrl"
                         [alt]="recipe.title"
-                        width="300"
-                        height="200"
+                        width="200"
+                        height="150"
                         class="w-full border-round"
                         priority
                       />
+                    </div>
+                    <div class="flex-1 flex flex-column gap-3 pl-4">
                       <div class="text-2xl font-bold">{{ recipe.title }}</div>
-                      <div class="text-center">{{ recipe.description }}</div>
-                      <div class="flex flex-wrap gap-2">
+                      <div class="flex gap-2">
                         @for (tag of recipe.tags; track tag) {
                           <p-tag [value]="tag"></p-tag>
                         }
                       </div>
                     </div>
                   </div>
-                </div>
-              }
-            </div>
-          </ng-template>
-        </p-dataView>
-      }
+                }
+              </div>
+            </ng-template>
+          </p-dataView>
+        }
+      </div>
     </div>
   `
 })
