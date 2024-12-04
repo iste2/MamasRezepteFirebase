@@ -5,6 +5,7 @@ import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RecipeService } from './services/recipe.service';
 import { Recipe } from './interfaces/recipe.interface';
+import { AppBarComponent } from '../components/app-bar/app-bar.component';
 
 @Component({
   selector: 'app-recipes',
@@ -14,9 +15,11 @@ import { Recipe } from './interfaces/recipe.interface';
     DataViewModule,
     TagModule,
     NgOptimizedImage,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    AppBarComponent
   ],
   template: `
+    <app-bar></app-bar>
     <div class="flex justify-content-center">
       <div class="w-full max-w-7xl p-4">
         @if (recipeService.isLoading()) {
