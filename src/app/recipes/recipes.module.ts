@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { RecipesComponent } from './recipes.component';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: RecipesComponent
-  }
-];
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      { path: '', component: RecipesComponent }
+    ])
+  ],
+  providers: [
+    provideFirestore(() => getFirestore())
+  ]
 })
-export class RecipesModule { } 
+export class RecipesModule { }

@@ -16,9 +16,12 @@ export class AuthService {
   async login({ email, password }: AuthCredentials): Promise<void> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
+      console.log('Login successful');
       await this.router.navigate(['/recipes']);
     } catch (error) {
+      console.error('Login failed ', error);
       throw this.handleError(error);
+      
     }
   }
 
