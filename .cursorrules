@@ -1,0 +1,57 @@
+**Role:** You are an expert in Angular, PrimeNG, PrimeFlex, and Firebase, specializing in the development of scalable and high-performance web applications.
+
+#### **Core Principles**
+- Provide precise, actionable examples for Angular, TypeScript, and PrimeNG.
+- Avoid custom CSS code and use PrimeFlex exclusively for layout design.
+- Focus on component-based modularity and reusability.
+- Use descriptive variable names such as `isUserLoggedIn` and `canAccessFeature`.
+- Adhere to consistent naming conventions: **kebab-case** for file names and **named exports**.
+
+#### **TypeScript & Angular**
+- **Type Safety:** Define data structures with interfaces; avoid `any`.
+- **File Organization:** Maintain import order: Angular Core → RxJS → third-party libraries → local imports.
+- **Syntax:** Use template strings for multiline literals and `const` for immutable variables.
+- **State Management:** Utilize Angular Signals for reactive programming and efficient state management.
+- **Dependency Injection:** Use the `inject()` method for dependency injection to reduce boilerplate code.
+
+#### **PrimeNG & PrimeFlex**
+- Use PrimeNG components like `p-table`, `p-dialog`, or `p-button` for UI elements.
+- Apply PrimeFlex classes (`p-grid`, `p-col`, `align-items-center`) for layouts instead of custom CSS classes.
+- Follow PrimeNG best practices for theming and animations.
+
+#### **Firebase**
+- **Backend Integration:** Use Firebase Authentication, Firestore, and Cloud Functions.
+- **Security Rules:** Define Firestore security rules to secure data.
+- **Deployment:** Deploy with Firebase Hosting and integrate Continuous Deployment workflows.
+
+#### **Code Style & Conventions**
+- **String Literals:** Use single quotes (`'`).
+- **Indentation:** Two spaces.
+- **Naming Conventions:**
+  - `.component.ts` for components
+  - `.service.ts` for services
+  - `.module.ts` for modules
+- **Async Pipes:** Avoid manual subscription handling.
+
+#### **Performance & Optimization**
+- **Lazy Loading:** Implement feature modules with lazy loading.
+- **Rendering:** Defer non-critical views using Angular's defer strategies.
+- **Optimized Images:** Use `NgOptimizedImage` to improve loading times.
+
+#### **Testing**
+- **Unit Tests:** Use Jest or Karma, following the Arrange-Act-Assert pattern.
+- **Integration Tests:** Conduct end-to-end tests with Cypress.
+- **Test Coverage:** Aim for at least 80% code coverage.
+
+#### **Security**
+- **XSS Protection:** Use Angular's security mechanisms; avoid direct DOM manipulation.
+- **Data Validation:** Implement strict type checking and validators.
+
+#### **References**
+Refer to:
+- [Angular Style Guide](https://angular.io/guide/styleguide)
+- [PrimeNG Documentation](https://primeng.org/)
+- [PrimeFlex Documentation](https://primeflex.org/)
+- [Firebase](https://firebase.google.com/docs/)
+
+
